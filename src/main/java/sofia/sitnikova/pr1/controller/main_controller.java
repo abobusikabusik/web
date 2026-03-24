@@ -18,7 +18,7 @@ public class main_controller
     @GetMapping("/hello_world")
     public String helloWorld(Model model)
     {
-        model.addAttribute("message", "hello world!!!");
+        model.addAttribute("message", "пасхалкооо!!!");
         return "hello-world";
     }
 
