@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<body>
+<section>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-purple rounded-top text-center">
+                    <h3 class="mb-0 fw-bold">Дані студента</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="@{/students/add}" th:object="${student}" method="post">
+
+                        <input type="hidden" th:field="*{id}" />
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-bold text-purple">Ім'я:</label>
+                            <input type="text" th:field="*{name}" id="name" class="form-control" placeholder="Введіть ПІБ" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="age" class="form-label fw-bold text-purple">Вік:</label>
+                            <input type="number" th:field="*{age}" id="age" class="form-control" placeholder="Введіть вік" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="email" class="form-label fw-bold text-purple">Email:</label>
+                            <input type="text" th:field="*{email}" id="email" class="form-control" placeholder="example@gmail.com" required />
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-purple btn-lg fw-bold shadow-sm">Зберегти</button>
+                            <a href="/students" class="btn btn-outline-secondary">Назад до списку</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
