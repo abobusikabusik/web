@@ -1,5 +1,7 @@
 package sofia.sitnikova.pr1.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sofia.sitnikova.pr1.model.student;
 import org.springframework.stereotype.Controller;
@@ -40,8 +42,13 @@ public class main_controller
 
     // Обробка POST-запиту
     @PostMapping("/add")
-    public String addStudent(@ModelAttribute student student)
+    public String addStudent(@Valid @ModelAttribute student student, BindingResult result)
     {
+        if (result.hasErrors())
+        {
+            return "add-student";
+        }
+
         if (student.getId() == 0)
         {
             // якщо ID нуль - це новий студент
@@ -55,6 +62,31 @@ public class main_controller
             students.add(student);
         }
         return "redirect:/students";
+    }
+
+    @GetMapping("/search")
+    public String searchStudents(@RequestParam(required = false) String name,
+                                 @RequestParam(required = false) String email,
+                                 @RequestParam(required = false) Integer id,
+                                 Model model) {
+        List<student> result = students.stream()
+                .filter(s -> (name == null || name.isEmpty() || s.getName().contains(name)))
+                .filter(s -> (email == null || email.isEmpty() || s.getEmail().contains(email)))
+                .filter(s -> (id == null || s.getId() == id))
+                .toList();
+
+        model.addAttribute("students", result);
+        return "students";
+    }
+
+    @GetMapping("/{id}")
+    public String viewStudent(@PathVariable int id, Model model) {
+        student s = students.stream()
+                .filter(st -> st.getId() == id)
+                .findFirst()
+                .orElse(null);
+        model.addAttribute("student", s);
+        return "student-details"; // Треба буде створити такий html файл
     }
 
     // редагування інфи студентів

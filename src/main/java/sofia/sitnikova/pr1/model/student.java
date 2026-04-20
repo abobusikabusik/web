@@ -1,9 +1,19 @@
 package sofia.sitnikova.pr1.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class student
 {
+    @NotBlank(message = "Ім'я обов'язкове")
     private String name;
+
+    @Min(value = 17, message = "Вік має бути більшим за 16")
     private int age;
+
+    @Email(message = "Некоректний формат email")
+    @NotBlank(message = "Email обов'язковий")
     private String email;
     private int id; // додала айді
 

@@ -8,6 +8,24 @@
             <a href="/students/add" class="btn btn-light fw-bold text-purple shadow-sm">➕ Додати</a>
         </div>
         <div class="card-body">
+            <div class="mb-4 p-3 bg-light rounded shadow-sm">
+                <form th:action="@{/students/search}" method="get" class="row g-2 align-items-center">
+                    <div class="col-md-3">
+                        <input type="text" name="name" class="form-control" placeholder="Ім'я...">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="email" class="form-control" placeholder="Email...">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" name="id" class="form-control" placeholder="ID">
+                    </div>
+                    <div class="col-md-4 d-flex gap-2">
+                        <button type="submit" class="btn btn-purple text-white fw-bold shadow-sm flex-grow-1">🔍 Пошук</button>
+                        <a href="/students" class="btn btn-outline-secondary shadow-sm">✖</a>
+                    </div>
+                </form>
+            </div>
+
             <table class="table table-hover table-striped table-bordered align-middle">
                 <thead class="table-light text-center">
                 <tr>
@@ -31,6 +49,9 @@
 
                             <a th:href="@{/students/delete/{id}(id=${student.id})}"
                                class="btn btn-sm btn-delete shadow-sm rounded">Видалити</a>
+
+                            <a th:href="@{/students/{id}(id=${student.id})}"
+                               class="btn btn-sm btn-info text-white shadow-sm me-2 rounded">Детальніше</a>
                         </div>
                     </td>
                 </tr>
