@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<body>
+<section>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-purple text-center">
+          <h3 class="mb-0 fw-bold">Картка студента</h3>
+        </div>
+        <div class="card-body p-4 text-center">
+          <div class="rounded-circle bg-purple d-inline-flex align-items-center justify-content-center mb-3 text-white"
+               style="width: 80px; height: 80px; font-size: 2rem;">
+            <span th:text="${student.name.substring(0,1)}">S</span>
+          </div>
+
+          <h2 class="fw-bold text-purple" th:text="${student.name}">Ім'я</h2>
+          <p class="text-muted">ID: <span th:text="${student.id}"></span></p>
+
+          <hr>
+
+          <div class="row text-start mt-4">
+            <div class="col-6 mb-3">
+              <label class="small text-muted d-block">Вік</label>
+              <span class="fw-bold fs-5" th:text="${student.age} + ' років'">18</span>
+            </div>
+            <div class="col-6 mb-3">
+              <label class="small text-muted d-block">Статус</label>
+              <span class="badge bg-success">Активний</span>
+            </div>
+            <div class="col-12">
+              <label class="small text-muted d-block">Контактна пошта</label>
+              <span class="fw-bold fs-5 text-purple" th:text="${student.email}">example@mail.com</span>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-purple fw-bold shadow-sm">Редагувати дані</a>
+            <a href="/students" class="btn btn-outline-secondary">Назад до списку</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
